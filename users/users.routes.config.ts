@@ -45,7 +45,7 @@ export class UsersRoutes extends CommonRoutesConfig {
                 res.status(200).send(`List of users`);
             })
             .post((req: express.Request, res: express.Response) => {
-                // genera el xml con el post
+                // genera el xml con el metodo post de la api
                 deService.generateXMLDE(params, req.body).then(xml => {
                     res.status(200).send(xml)
                 });
