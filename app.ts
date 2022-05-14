@@ -7,7 +7,7 @@ import cors from 'cors';
 import {CommonRoutesConfig} from './common/common.routes.config';
 import {UsersRoutes} from './users/users.routes.config';
 import debug from 'debug';
-
+// declara las constantes
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);
 const port = 3000;
