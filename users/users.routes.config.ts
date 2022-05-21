@@ -1,6 +1,7 @@
 import { CommonRoutesConfig } from '../common/common.routes.config';
 import deService from '../users/services/jsonDeMain.service';
 import express from 'express';
+import dsig from "../users/services/XMLDsig";
 
 const params = {
     "version": 150,
@@ -34,20 +35,25 @@ const params = {
     }]
 }
 
+let file = ""
+let password = ""
+
 export class UsersRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {
         super(app, 'UsersRoutes');
     }
 
     configureRoutes() {
-        this.app.route(`/generate-xml`)
+        this.app.route(`/documentoset`)
             .get((req: express.Request, res: express.Response) => {
                 res.status(200).send(`List of users`);
             })
             .post((req: express.Request, res: express.Response) => {
                 // genera el xml con el metodo post de la api
                 deService.generateXMLDE(params, req.body).then(xml => {
-                    res.status(200).send(xml)
+                    //res.status(200).send(xml)
+                    dsig.openFile(file, password); //ruta del certificado p12
+                    dsig.signDocument(xml, "DE");
                 });
             });
 
