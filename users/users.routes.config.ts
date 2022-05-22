@@ -35,7 +35,7 @@ const params = {
     }]
 }
 //ruta y pwd del certificado p12
-let file = "D:\PROYECTOS\DIGSA\SET\facturacionelectronicapy\documenta.p12" 
+let file = "D:/PROYECTOS/DIGSA/SET/facturacionelectronicapy/certificado.p12"
 let password = "12345"
 
 export class UsersRoutes extends CommonRoutesConfig {
@@ -48,10 +48,11 @@ export class UsersRoutes extends CommonRoutesConfig {
             .post((req: express.Request, res: express.Response) => {
                 // genera el xml con el metodo post de la api
                 deService.generateXMLDE(params, req.body).then(xml => {
-                    dsig.openFile(file, password); 
-                    dsig.signDocument(xml, "DE").then(xml){
-                        res.status(200).send(xml)
-                    }
+                    //res.status(200).send(xml)
+                    dsig.openFile(file, password);
+                    dsig.signDocument(xml, "DE").then(xmlfirmado => {
+                        res.status(200).send(xmlfirmado)
+                    })
                 });
             });
 

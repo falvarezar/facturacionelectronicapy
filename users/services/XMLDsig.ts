@@ -64,7 +64,7 @@ class XMLDsig {
           Transform: [
             {
               $: {
-                Algorithm:
+                Algorithm: 
                   "http://www.w3.org/2000/09/xmldsig#enveloped-signature",
               },
             },
@@ -107,8 +107,9 @@ class XMLDsig {
         }
 
         const classPath = "" + __dirname + "";
-        //const tmpXMLToSign = "" + __dirname + "/xml_sign_temp.xml";
-        const tmpXMLToSign = "" + __dirname + "/xml_sign_temp_" + Math.round(Math.random() * 999999) + ".xml";
+        //const tmpXMLToSign = "" + __dirname + "/xml_sign_temp_";
+        const tmpXMLToSign = "" + __dirname + "\\xml_sign_temp_" + Math.round(Math.random() * 999999) + ".xml";
+        //const tmpXMLToSign = "" + __dirname + "\\factura.xml";
 
         fs.writeFileSync(tmpXMLToSign, xml, { encoding: "utf8" });
 
@@ -163,7 +164,8 @@ class XMLDsig {
         }
 
         const classPath = "" + __dirname + "";
-        const tmpXMLToSign = "" + __dirname + "/xml_sign_temp.xml";
+        const tmpXMLToSign = "" + __dirname + "\\xml_sign_temp.xml";
+        //const tmpXMLToSign = "" + __dirname + "\\factura.xml";
 
         fs.writeFileSync(tmpXMLToSign, xml, { encoding: "utf8" });
 
