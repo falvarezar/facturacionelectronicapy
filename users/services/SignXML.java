@@ -22,7 +22,7 @@ import javax.xml.crypto.dsig.XMLSignatureFactory;
 import javax.xml.crypto.dsig.dom.DOMSignContext;
 import javax.xml.crypto.dsig.keyinfo.KeyInfo;
 import javax.xml.crypto.dsig.keyinfo.KeyInfoFactory;
-import javax.xml.crypto.dsig.keyinfo.KeyValue;
+//import javax.xml.crypto.dsig.keyinfo.KeyValue; fabian comente
 import javax.xml.crypto.dsig.keyinfo.X509Data;
 import javax.xml.crypto.dsig.keyinfo.X509IssuerSerial;
 import javax.xml.crypto.dsig.spec.C14NMethodParameterSpec;
@@ -36,7 +36,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+//import org.w3c.dom.NodeList; fabian comente
 
 /**
  * This is a simple example of validating an XML
@@ -107,7 +107,7 @@ public class SignXML {
 		SignatureMethod signatureMethod = sigFactory.newSignatureMethod("http://www.w3.org/2001/04/xmldsig-more#rsa-sha256", null);
         SignedInfo si = sigFactory.newSignedInfo(canonicalizationMethod, signatureMethod, Collections.singletonList(ref));
 
-        // Create a KeyValue containing the RSA PublicKey
+        //Create a KeyValue containing the RSA PublicKey
         KeyInfoFactory keyInfoFactory = sigFactory.getKeyInfoFactory();
 
         X509IssuerSerial x509IssuerSerial = keyInfoFactory.newX509IssuerSerial(cert.getSubjectX500Principal().getName(), cert.getSerialNumber());
