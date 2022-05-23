@@ -104,9 +104,22 @@ class JSonDteTotalesService {
       }
     }
 
+    if (data.moneda != 'PYG') {
+      dTotOpe = parseFloat(dTotOpe.toFixed(2));
+    }
+
     let dRedon = 0;
     if (config.redondeoSedeco) {
-      dRedon = this.redondeoSedeco(dTotOpe);
+      if (data.moneda === 'PYG') {
+        dRedon = this.redondeoSedeco(dTotOpe);
+      } else {
+        //Observación: Para monedas extranjeras o cualquier otro cálculo que contenga decimales, las reglas de validación
+        //aceptarán redondeos de 50 céntimos (por encima o por debajo)
+        if (dTotOpe % 1 != 0) {
+          //Es moneda extranjera, en decimal
+          console.log('Moneda extranjera decimal ' + dTotOpe);
+        }
+      }
     }
 
     if (!(data['tipoImpuesto'] != 1 && data['tipoImpuesto'] != 5)) {
@@ -127,6 +140,9 @@ class JSonDteTotalesService {
     //---
     //Corresponde al cálculo aritmético F008 - F013 + F025
     let dTotGralOpe = dTotOpe - dRedon + (data['comision'] || 0);
+    if (data.moneda != 'PYG') {
+      dTotGralOpe = parseFloat(dTotGralOpe.toFixed(2));
+    }
     //dTotOpe + dRedon + dComi;
     //Si C002 = 1, 5 o 6, entonces dTotGralOpe(F014) = F008 - F011 - F012 - F013
     /*if (data['tipoDocumento'] == 1 || data['tipoDocumento'] == 5 || data['tipoDocumento'] == 6) {
@@ -144,9 +160,18 @@ class JSonDteTotalesService {
       if (!(data['tipoImpuesto'] != 1)) {
         //No debe existir si D013 != 1        if (dSub5 > 0) {
         jsonResult['dSub5'] = dSub5;
+
+        if (data.moneda != 'PYG') {
+          jsonResult['dSub5'] = parseFloat(dSub5.toFixed(2));
+        }
       }
+
       if (dSub10 > 0) {
         jsonResult['dSub10'] = dSub10;
+
+        if (data.moneda != 'PYG') {
+          jsonResult['dSub10'] = parseFloat(dSub10.toFixed(2));
+        }
       }
     }
 

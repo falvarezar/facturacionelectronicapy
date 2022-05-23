@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "prebuild": "javac users/services/SignXML.java users/services/SignXMLEvento.java",
-    "build": "tsc && copyfiles --up 1 src/**/*.class dist",
-    "format": "prettier --write \"src/**/*.ts\"",
+    "build": "tsc && copyfiles --up 1 users/services/**/*.class dist",
+    "format": "prettier --write \"users/services/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
     "prepublish": "",
